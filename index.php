@@ -51,6 +51,8 @@
                                         echo "<th>#</th>";
                                         echo "<th>Nombre</th>";
                                         echo "<th>Apellido</th>";
+                                        echo "<th>Actions</th>";
+
                                     echo "</tr>";
                                 echo "</thead>";
                                 echo "<tbody>";
