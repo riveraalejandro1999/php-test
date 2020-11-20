@@ -5,7 +5,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     require_once "config.php";
     
     // Prepare a delete statement
-    $sql = "DELETE FROM employees WHERE id = ?";
+    $sql = "DELETE FROM clientes WHERE id = ?";
     
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
@@ -24,9 +24,11 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         }
     }
      
-    // Close statement
-    mysqli_stmt_close($stmt);
+    if($stmt = mysqli_prepare($link, $sql)){
+        // [...]
     
+        mysqli_stmt_close($stmt);
+    }
     // Close connection
     mysqli_close($link);
 } else{

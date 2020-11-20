@@ -42,8 +42,8 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
     // Check input errors before inserting in database
     if(empty($name_err) && empty($address_err) && empty($salary_err)){
         // Prepare an update statement
-        $sql = "UPDATE employees SET name=?, address=?, salary=? WHERE id=?";
-         
+        $sql = "UPDATE clientes SET name=?, address=?, salary=? WHERE id=?";
+
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "sssi", $param_name, $param_address, $param_salary, $param_id);
@@ -63,11 +63,12 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
                 echo "Something went wrong. Please try again later.";
             }
         }
-         
         // Close statement
-        mysqli_stmt_close($stmt);
+        if($stmt = mysqli_prepare($link, $sql)){
+            // [...]
+            mysqli_stmt_close($stmt);
+        }   
     }
-    
     // Close connection
     mysqli_close($link);
 } else{
@@ -77,7 +78,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $id =  trim($_GET["id"]);
         
         // Prepare a select statement
-        $sql = "SELECT * FROM employees WHERE id = ?";
+        $sql = "SELECT * FROM clientes WHERE id = ?";
         if($stmt = mysqli_prepare($link, $sql)){
             // Bind variables to the prepared statement as parameters
             mysqli_stmt_bind_param($stmt, "i", $param_id);
@@ -109,7 +110,10 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         }
         
         // Close statement
-        mysqli_stmt_close($stmt);
+        if($stmt = mysqli_prepare($link, $sql)){
+            // [...]
+            mysqli_stmt_close($stmt);
+        }
         
         // Close connection
         mysqli_close($link);
